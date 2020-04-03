@@ -2,18 +2,21 @@ import React from 'react';
 import { Switch, Route } from 'react-router';
 import { AppLayout } from './layouts';
 import { Home } from './home';
-import { Counter } from './counter';
+import { Login } from './login';
 
 export const HOME = '/';
-export const COUNTER = '/counter';
+export const LOGIN = '/login';
 
-const Routes = () => (
-  <AppLayout>
+const Routes = () => {
+  console.log(window.location);
+  return (
     <Switch>
-      <Route path={COUNTER} component={Counter} />
-      <Route path={HOME} component={Home} />
+      <Route path={LOGIN} component={Login} />
+      <AppLayout>
+        <Route path={HOME} component={Home} />
+      </AppLayout>
     </Switch>
-  </AppLayout>
-);
+  );
+};
 
 export default Routes;

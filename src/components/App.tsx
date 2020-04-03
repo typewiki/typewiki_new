@@ -6,6 +6,7 @@ import { StoreProvider } from 'easy-peasy';
 import store, { history } from 'store';
 import Routes from './Routes';
 import { warn } from 'electron-log';
+import { HashRouter, Route } from 'react-router-dom';
 
 const App: React.FC = () => {
   useEffect(() => warn('Rendering App component'), []);
@@ -16,7 +17,9 @@ const App: React.FC = () => {
       <Provider store={store as any}>
         {/* connected-react-router  */}
         <ConnectedRouter history={history}>
-          <Routes />
+          <HashRouter>
+            <Routes />
+          </HashRouter>
         </ConnectedRouter>
       </Provider>
     </StoreProvider>
