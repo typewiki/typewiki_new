@@ -7,12 +7,13 @@ import {
   IconName,
   Navbar,
   NavbarGroup,
+  Colors,
 } from '@blueprintjs/core';
 import { IconNames } from '@blueprintjs/icons';
 import { remote } from 'electron';
 import { withRouter } from 'react-router';
 
-const { BrowserWindow } = remote;
+const { BrowserWindow, getCurrentWindow } = remote;
 
 // @ts-ignore
 const AppLayout: React.FC = ({ children, history }) => {
@@ -30,6 +31,9 @@ const AppLayout: React.FC = ({ children, history }) => {
               const win = new BrowserWindow({
                 height: 300,
                 width: 400,
+                backgroundColor: Colors.LIGHT_GRAY4,
+                modal: true,
+                parent: getCurrentWindow(),
                 useContentSize: true,
                 title: 'Log in',
                 resizable: false,
