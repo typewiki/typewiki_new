@@ -51,8 +51,8 @@ module.exports = [
   config => {
     const rule = config.module.rules.find(rule => rule.oneOf);
 
-    rule.oneOf.unshift(getLessLoader(/\.less$/, false));
-    rule.oneOf.unshift(getLessLoader(/\.module\.less$/, true));
+    // rule.oneOf.unshift(getLessLoader(/\.less$/, false));
+    // rule.oneOf.unshift(getLessLoader(/\.module\.less$/, true));
 
     return config;
   },

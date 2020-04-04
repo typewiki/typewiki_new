@@ -10,6 +10,7 @@ import {
 } from '@blueprintjs/core';
 import { remote } from 'electron';
 import { useFormik } from 'formik';
+import { useTranslation } from 'react-i18next';
 
 const { getCurrentWindow } = remote;
 
@@ -19,6 +20,7 @@ const initialValues = {
 };
 
 const Login: React.FC = () => {
+  const { t } = useTranslation();
   const { values, handleSubmit } = useFormik({
     initialValues,
     onSubmit({ name, password }) {
@@ -40,19 +42,19 @@ const Login: React.FC = () => {
       }}
     >
       <div className={Classes.DIALOG_BODY}>
-        <FormGroup label={'Username'} labelFor="text-input">
-          <InputGroup id="text-input" placeholder="Placeholder text" />
+        <FormGroup label={t('userlogin-yourname')} labelFor="yourname">
+          <InputGroup id="yourname" placeholder={t('userlogin-yourname-ph')} />
         </FormGroup>
-        <FormGroup label={'Password'} labelFor="text-input">
-          <InputGroup id="text-input" placeholder="Placeholder text" />
+        <FormGroup label={t('userlogin-yourpassword')} labelFor="yourpassword">
+          <InputGroup id="yourpassword" placeholder={t('userlogin-yourpassword-ph')} />
         </FormGroup>
-        <Checkbox label="Keep me logged in (for up to 365 days)" />
+        <Checkbox label={t('userlogin-remembermypassword')} />
       </div>
       <div className={Classes.DIALOG_FOOTER}>
         <div className={Classes.DIALOG_FOOTER_ACTIONS}>
-          <Button onClick={handleClose}>Close</Button>
+          <Button onClick={handleClose}>{t('feedback-cancel')}</Button>
           <Button intent={Intent.PRIMARY} onClick={() => handleSubmit()}>
-            Log In
+            {t('pt-login-button')}
           </Button>
         </div>
       </div>

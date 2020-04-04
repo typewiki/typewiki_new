@@ -8,7 +8,7 @@
     "prettier --parser json --write",
     "git add"
   ],
-  "*.less": [
+  "*.scss": [
     "stylelint --syntax scss --fix",
     "prettier --single-quote --write",
     "git add"

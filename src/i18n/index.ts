@@ -5,17 +5,17 @@ import { initReactI18next } from 'react-i18next';
 const detectedLang = (app || remote.app).getLocale();
 
 const config: LocalConfig = {
-  fallbackLng: 'en-US',
+  fallbackLng: 'en',
   languages: {
-    'en-US': 'English',
-    es: 'Español',
+    en: 'English',
+    ru: 'Español',
   },
 };
 
 const resources = Object.keys(config.languages).reduce(
   (acc: { [key: string]: any }, lang) => {
     acc[lang] = {
-      translation: require(`./locales/${lang}.json`),
+      translation: require(`../../mediawiki/languages/i18n/${lang}.json`),
     };
     return acc;
   },
@@ -33,7 +33,7 @@ const whitelist = Object.keys(config.languages).reduce((acc: string[], lang) => 
 }, []);
 
 i18n.use(initReactI18next).init({
-  lng: detectedLang || 'en-US',
+  lng: detectedLang || 'ru',
   resources,
   whitelist,
   fallbackLng: config.fallbackLng,

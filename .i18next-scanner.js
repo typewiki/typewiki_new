@@ -17,8 +17,8 @@ module.exports = {
     trans: {
       defaultsKey: 'defaults',
     },
-    lngs: ['en-US', 'es'],
-    defaultLng: 'en-US',
+    lngs: ['en', 'ru'],
+    defaultLng: 'ru',
     ns: ['translation'],
     defaultNs: 'translation',
     defaultValue: '__MISSING__TRANSLATION__',
