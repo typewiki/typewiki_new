@@ -18,6 +18,9 @@
       "version": "detect" // Tells eslint-plugin-react to automatically detect the version of React to use
     }
   },
+  "plugins": [
+    "@blueprintjs/blueprint"
+  ],
   "rules": {
     // Place to specify ESLint rules. Can be used to overwrite rules specified from the extended configs
     "react/prop-types": "off",

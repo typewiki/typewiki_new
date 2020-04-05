@@ -1,6 +1,8 @@
 import { call, put, takeLatest } from 'redux-saga/effects';
 import { fetchRevisions } from '../../routines';
 import api from '../api';
+import { normalize } from 'normalizr';
+import querySchema from '../../schemas/query';
 
 function* handleTriggerAction() {
   try {
@@ -17,8 +19,8 @@ function* handleTriggerAction() {
         rvlimit: '100',
       },
     });
-    console.log(data.query.pages[0].revisions);
-    yield put(fetchRevisions.success({ data: data.query.pages[0].revisions }));
+    const { entities } = normalize(data.query, querySchema);
+    yield put(fetchRevisions.success({ entities }));
   } catch (e) {
     yield put(fetchRevisions.failure(e));
   }

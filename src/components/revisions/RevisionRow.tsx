@@ -1,81 +1,67 @@
 import React from 'react';
-import { remote, MenuItemConstructorOptions } from 'electron';
-import { findDOMNode } from 'react-dom';
+import { MenuItemConstructorOptions } from 'electron';
 import { Row } from 'react-table';
+import useContextMenu from '../use-context-menu';
 
-const { Menu, MenuItem } = remote;
-
-const RevisionRow: React.FC<Row<any>> = ({ original, getRowProps, cells }) => {
-  const menuItems: MenuItemConstructorOptions[] = [
-    {
-      label: 'Copy Revision Number',
-      click: () => {
-        console.log(432423);
+const RevisionRow: React.FC<Row<any>> = ({
+  original,
+  getRowProps,
+  cells,
+  // @ts-ignore
+  handleSelect,
+}) => {
+  const items: MenuItemConstructorOptions[] = React.useMemo(
+    () => [
+      {
+        label: 'Copy Revision Number',
+        click: () => {
+          console.log(432423);
+        },
       },
-    },
-    {
-      label: 'Copy Revision SHA-1',
-      click: () => {
-        console.log(432423);
+      {
+        label: 'Copy Revision SHA-1',
+        click: () => {
+          console.log(432423);
+        },
       },
-    },
-    {
-      type: 'separator',
-    },
-    {
-      label: `Checkout Revision '${original.revid}'...`,
-      click: () => {
-        console.log(432423);
+      {
+        type: 'separator',
       },
-    },
-    {
-      label: 'Compare with Current',
-      click: () => {
-        console.log(432423);
+      {
+        label: `Checkout Revision '${original.revid}'...`,
+        click: () => {
+          console.log(432423);
+        },
       },
-    },
-    {
-      type: 'separator',
-    },
-    {
-      label: 'Rollback...',
-    },
-    {
-      label: 'Undo Revision...',
-    },
-    {
-      type: 'separator',
-    },
-    {
-      label: 'Send thanks',
-    },
-  ];
+      {
+        label: 'Compare with Current',
+        click: () => {
+          console.log(432423);
+        },
+      },
+      {
+        type: 'separator',
+      },
+      {
+        label: 'Rollback...',
+      },
+      {
+        label: 'Undo Revision...',
+      },
+      {
+        type: 'separator',
+      },
+      {
+        label: 'Send thanks',
+      },
+    ],
+    [],
+  );
 
-  const menu = new Menu();
-  menuItems.map(options => menu.append(new MenuItem(options)));
+  const [ref] = useContextMenu(items);
 
-  const ref = React.useRef(null);
-
-  React.useEffect(() => {
-    // eslint-disable-next-line react/no-find-dom-node
-    const domNode = findDOMNode(ref.current);
-
-    // eslint-disable-next-line @typescript-eslint/ban-ts-ignore
-    // @ts-ignore
-    const listener = e => {
-      e.preventDefault();
-      menu.popup();
-    };
-
-    if (domNode) {
-      domNode.addEventListener('contextmenu', listener);
-      return () => {
-        domNode.removeEventListener('contextmenu', listener);
-      };
-    }
-  }, [ref]);
   return (
-    <tr ref={ref} {...getRowProps()}>
+    <tr ref={ref} onClick={() => handleSelect(original)} {...getRowProps()}>
       {cells.map((cell: any, j: any) => {
         return (
           <td key={j} {...cell.getCellProps()}>
@@ -87,4 +73,4 @@ const RevisionRow: React.FC<Row<any>> = ({ original, getRowProps, cells }) => {
   );
 };
 
-export default RevisionRow;
+export default React.memo(RevisionRow);
