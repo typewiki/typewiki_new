@@ -1,0 +1,14 @@
+.tab {
+  margin-right: 10px !important;
+  margin-top: 0;
+}
+
+.button {
+  border-bottom-right-radius: 0 !important;
+  border-bottom-left-radius: 0 !important;
+  border-bottom-color: transparent !important;
+
+  &:hover {
+    background: none !important;
+  }
+}

@@ -193,7 +193,7 @@ const Revisions: React.FC = () => {
               <Button icon={IconNames.COMPARISON} title={t('editundo')} />
               <Button icon={IconNames.UNDO} title={t('editundo')} />
             </ButtonGroup>
-            <div style={{ padding: 10 }}>
+            <div style={{ padding: 20 }}>
               <FormGroup
                 helperText={
                   <>

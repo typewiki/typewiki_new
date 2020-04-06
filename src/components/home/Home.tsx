@@ -2,17 +2,21 @@ import React, { useEffect } from 'react';
 import { info } from 'electron-log';
 import { DateRangeInput } from '@blueprintjs/datetime';
 import { Revisions } from '../revisions';
-import { Tab, Tabs } from '@blueprintjs/core';
+import { Button, Tab, Tabs } from '@blueprintjs/core';
 import { useTranslation } from 'react-i18next';
 import { RecentChangesLinked } from '../recent-changes-linked';
 import { LinksHere } from '../links-here';
+import PageTabs from './PagesTabs';
 
 const Home = () => {
   useEffect(() => info('Rendering Home component'), []);
   const { t } = useTranslation();
   const [selectedTabId, setSelectedTabId] = React.useState('page.history');
   return (
-    <div style={{ padding: 10 }}>
+    <div>
+
+
+      <PageTabs />
       <Tabs
         id="TabsExample"
         onChange={newTabId => {
