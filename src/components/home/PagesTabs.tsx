@@ -1,43 +1,66 @@
 import React from 'react';
-import { Button, Classes, Tab, Tabs } from '@blueprintjs/core';
+import { Button, Classes, Icon, Tab, Tabs } from '@blueprintjs/core';
 import styles from './PagesTabs.module.scss';
+import Editor from './Editor';
+import { useDispatch, useSelector } from 'react-redux';
+import { closeTab, createTab, openTab } from '../../store/actions/revisions';
+import tabSchema from '../../store/schemas/tab';
+import useDenormalize from './use-denormalize';
 
 const PageTabs = () => {
-  const [selectedTabId, setSelectedTabId] = React.useState('xxxx');
+  // @ts-ignore
+  const { currentTabId } = useSelector(({ tabs }) => tabs);
+
+  const [data] = useDenormalize(tabSchema, ({ tabs }) => ({
+    input: tabs.results,
+    entities: tabs.entities,
+  }));
+
+  const dispatch = useDispatch();
+
+  const handleChange = React.useCallback(newTabId => {
+    if (newTabId) {
+      dispatch(openTab(newTabId));
+    }
+  }, []);
+
+  const handleCreate = React.useCallback(() => dispatch(createTab()), []);
+  const handleClose = React.useCallback(tabId => dispatch(closeTab(tabId)), []);
+
   return (
     <Tabs
       className="page-tabs"
-      selectedTabId={selectedTabId}
+      selectedTabId={currentTabId}
       animate={false}
-      onChange={newTabId => {
-        setSelectedTabId(newTabId.toString());
-      }}
+      onChange={handleChange}
     >
+      {data.map((tab: any) => (
+        <Tab
+          id={tab.id}
+          key={`tab_${tab.id}`}
+          className={styles.tab}
+          title={
+            <Button
+              className={styles.button}
+              text={<span className={Classes.TEXT_SMALL}>{tab.id}</span>}
+              outlined
+              rightIcon={
+                <Icon
+                  icon="small-cross"
+                  className={styles.close}
+                  onClick={e => {
+                    e.stopPropagation();
+                    handleClose(tab.id);
+                  }}
+                />
+              }
+            />
+          }
+          panel={<Editor />}
+        />
+      ))}
       <Tab
-        id="xxxx"
-        className={styles.tab}
-        title={
-          <Button
-            className={styles.button}
-            text={<span className={Classes.TEXT_SMALL}>5454</span>}
-            outlined
-            rightIcon="small-cross"
-          />
-        }
-        panel={<>sdsad</>}
-      />
-      <Tab
-        id="xxxx2"
-        className={styles.tab}
-        title={
-          <Button
-            className={styles.button}
-            text={<span className={Classes.TEXT_SMALL}>5454</span>}
-            outlined
-            rightIcon="small-cross"
-          />
-        }
-        panel={<>4444sdsad</>}
+        title={<Icon icon="small-plus" className={styles.plus} onClick={handleCreate} />}
       />
     </Tabs>
   );

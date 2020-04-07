@@ -1,3 +1,5 @@
+@import '~@blueprintjs/core/src/common/variables';
+
 .tab {
   margin-right: 5px !important;
 }
@@ -9,5 +11,23 @@
 
   &:hover {
     background: none !important;
+  }
+}
+
+.effect {
+  transition: color 0.5s ease-out;
+}
+
+.close {
+  @extend .effect;
+  &:hover {
+    color: $pt-intent-danger !important;
+  }
+}
+
+.plus {
+  @extend .effect;
+  &:hover {
+    color: $pt-intent-success !important;
   }
 }

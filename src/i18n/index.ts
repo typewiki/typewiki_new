@@ -7,7 +7,7 @@ const detectedLang = (app || remote.app).getLocale();
 const config: LocalConfig = {
   fallbackLng: 'en',
   languages: {
-    en: 'English',
+    //en: 'English',
     ru: 'Español',
   },
 };
