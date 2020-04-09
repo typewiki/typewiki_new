@@ -5,7 +5,7 @@ import Editor from './Editor';
 import { useDispatch, useSelector } from 'react-redux';
 import { closeTab, createTab, openTab } from '../../store/actions/revisions';
 import tabSchema from '../../store/schemas/tab';
-import useDenormalize from './use-denormalize';
+import useDenormalize from '../../use-denormalize';
 
 const PageTabs = () => {
   // @ts-ignore

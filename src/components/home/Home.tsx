@@ -1,12 +1,13 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, Suspense } from 'react';
 import { info } from 'electron-log';
 import { DateRangeInput } from '@blueprintjs/datetime';
-import { Revisions } from '../revisions';
-import { Button, Tab, Tabs } from '@blueprintjs/core';
+import { Tab, Tabs } from '@blueprintjs/core';
 import { useTranslation } from 'react-i18next';
 import { RecentChangesLinked } from '../recent-changes-linked';
 import { LinksHere } from '../links-here';
 import PageTabs from './PagesTabs';
+
+const Revisions = React.lazy(() => import('../revisions'));
 
 const Home = () => {
   useEffect(() => info('Rendering Home component'), []);
@@ -14,8 +15,6 @@ const Home = () => {
   const [selectedTabId, setSelectedTabId] = React.useState('page.history');
   return (
     <div>
-
-
       <PageTabs />
       <Tabs
         id="TabsExample"
@@ -26,7 +25,15 @@ const Home = () => {
         selectedTabId={selectedTabId}
         renderActiveTabPanelOnly
       >
-        <Tab id="page.history" title={t('history')} panel={<Revisions />} />
+        <Tab
+          id="page.history"
+          title={t('history')}
+          panel={
+            <Suspense fallback={<div>fdsfdf</div>}>
+              <Revisions />
+            </Suspense>
+          }
+        />
         <Tab
           id="page.recentchangeslinked"
           title={t('recentchangeslinked')}

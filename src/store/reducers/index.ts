@@ -4,6 +4,8 @@ import { History } from 'history';
 import revisions from './revisions';
 import tabs from './tabs';
 import pages from './pages';
+import login from './login';
+import userInfo from './user-info';
 
 // import { CounterState, counterReducer } from './counterReducer';
 
@@ -13,6 +15,8 @@ export interface RootState {
   revisions: any;
   pages: any;
   tabs: any;
+  login: any;
+  userInfo: any;
 }
 
 export const createRootReducer = (history: History) =>
@@ -21,4 +25,6 @@ export const createRootReducer = (history: History) =>
     pages,
     tabs,
     revisions,
+    login,
+    userInfo,
   });

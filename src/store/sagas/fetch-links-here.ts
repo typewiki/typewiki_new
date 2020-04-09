@@ -1,5 +1,5 @@
 import { call, put, takeLatest } from 'redux-saga/effects';
-import api from './api';
+import api from '../utils/api';
 import { fetchLinksHere } from '../routines';
 
 function* handleTriggerAction() {

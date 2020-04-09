@@ -1,6 +1,6 @@
 import { call, put, takeLatest } from 'redux-saga/effects';
 import { fetchRevisions } from '../../routines';
-import api from '../api';
+import api from '../../utils/api';
 import { normalize } from 'normalizr';
 import querySchema from '../../schemas/query';
 

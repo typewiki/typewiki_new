@@ -1,1 +1,1 @@
-export { default as Revisions } from './Revisions';
+export { default } from './Revisions';
